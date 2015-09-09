@@ -45,15 +45,21 @@ class Figure:
             else:
                 game.table[new_pos].append(self)
 
+        return new_pos
+
     def _change_position(self, points, old_pos, start_pos):
         goal = self.moves_made + points
-        
         if goal <= TABLE_LENGTH:
             self.moves_made += points
             return (old_pos + points) % TABLE_LENGTH
         if goal in range(TABLE_LENGTH, TABLE_LENGTH + 7):
             self.moves_made += points
             return TABLE_LENGTH + (self.player.id_*4 + goal - TABLE_LENGTH)
+
+    #to be defined
+    def __eq__(self, other):
+        pass
+
 
 class Game:
     def __init__(self, current_player):
@@ -62,8 +68,7 @@ class Game:
         self.current_player = current_player
     def move_figure(self, figure, points):
         #auth required
-        figure_pos = self.current_player.figures_count[figure]
-        new_figure_pos = 
+        figure.move(points, self)
 
 class Dice:
     @staticmethod

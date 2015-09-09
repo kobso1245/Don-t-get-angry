@@ -1,2 +1,4 @@
-{"COLOURS":["RED", "WHITE", "BLUE", "YELLOW"]
+{
+    "COLOURS":["RED", "WHITE", "BLUE", "YELLOW"],
+    "IPs": ["localhost:8100", "localhost:8101"]
 }
