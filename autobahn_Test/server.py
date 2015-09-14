@@ -1,4 +1,6 @@
 from json import load, dump
+from os import system
+from time import sleep
 from twisted.internet import reactor
 from autobahn.twisted.websocket import WebSocketServerFactory, WebSocketClientFactory
 from autobahn.twisted.websocket import WebSocketServerProtocol, WebSocketClientProtocol
@@ -62,4 +64,11 @@ if __name__ == '__main__':
     
     current_users = factory.protocol.USERS 
     save_users_ips('settings.json', current_users)
+    sleep(10)
+    curr_user = 0
+    to_be_called = 'python logic_client.py {}'
+    while True:
+        fin_to_be_called = to_be_called.format(curr_user)
+        system(fin_to_be_called)
+        curr_user = (curr_user + 1) % len(current_users)
 
