@@ -1,7 +1,10 @@
 import asyncio
 import websockets
+
+
 def input_loop():
     name = input("Please select name: ")
+
 
 @asyncio.coroutine
 def get_pl_id(websocket, path):
@@ -15,5 +18,5 @@ ev_loop.run_forever()
 
 
 def main():
-    #get player id
+    # get player id
     pass

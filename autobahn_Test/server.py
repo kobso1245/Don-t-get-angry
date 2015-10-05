@@ -6,6 +6,7 @@ from autobahn.twisted.websocket import WebSocketServerFactory, WebSocketClientFa
 from autobahn.twisted.websocket import WebSocketServerProtocol, WebSocketClientProtocol
 # or: from autobahn.asyncio.websocket import WebSocketServerProtocol
 
+
 class GetUsers(WebSocketServerProtocol):
     USERS = []
     TIMER = None
@@ -30,10 +31,12 @@ class GetUsers(WebSocketServerProtocol):
             GetUsers.USERS = edit_user_ip(GetUsers.USERS)
             self.factory.reactor.stop()
 
+
 def get_users_count(fact):
     with open('settings.json') as settings:
         loaded_file = load(settings)
         fact.USERS_NUMBER = loaded_file['users_count']
+
 
 def save_users_count(file_name, users_count):
     curr_fle = None
@@ -42,6 +45,7 @@ def save_users_count(file_name, users_count):
         curr_fle['users_count'] = users_count
     with open(file_name, 'w') as settings:
         dump(curr_fle, settings)
+
 
 def save_users_ips(file_name, users_ips):
     curr_fle = None
@@ -52,7 +56,6 @@ def save_users_ips(file_name, users_ips):
         dump(curr_fle, settings)
 
 
-
 if __name__ == '__main__':
     factory = WebSocketServerFactory()
     factory.protocol = GetUsers
@@ -61,8 +64,8 @@ if __name__ == '__main__':
     get_users_count(factory.protocol)
     reactor.listenTCP(9000, factory)
     reactor.run()
-    
-    current_users = factory.protocol.USERS 
+
+    current_users = factory.protocol.USERS
     save_users_ips('settings.json', current_users)
     sleep(10)
     curr_user = 0
@@ -71,4 +74,3 @@ if __name__ == '__main__':
         fin_to_be_called = to_be_called.format(curr_user)
         system(fin_to_be_called)
         curr_user = (curr_user + 1) % len(current_users)
-

@@ -8,6 +8,7 @@ from time import sleep
 from twisted.python import log
 from twisted.internet import reactor
 
+
 class MyClientProtocol(WebSocketClientProtocol):
 
     def onConnect(self, response):
@@ -33,4 +34,3 @@ if __name__ == '__main__':
     reactor.connectTCP("127.0.0.1", 9000, factory)
     reactor.run()
     system('python logic_server.py')
-

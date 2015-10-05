@@ -4,6 +4,7 @@ from autobahn.twisted.websocket import WebSocketClientProtocol, \
     WebSocketServerProtocol
 from logic_server import server_side
 
+
 class MyClientProtocol(WebSocketClientProtocol):
 
     def onConnect(self, response):
@@ -19,7 +20,7 @@ class MyClientProtocol(WebSocketClientProtocol):
         self.sendClose()
 
         # start sending messages every second ..
-        #hello()
+        # hello()
 
     def onMessage(self, payload, isBinary):
         pass
@@ -44,4 +45,3 @@ if __name__ == '__main__':
     reactor.connectTCP("127.0.0.1", 9000, factory)
     reactor.run()
     system('python logic_server2.py')
-

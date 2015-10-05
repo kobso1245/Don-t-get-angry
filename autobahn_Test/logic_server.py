@@ -8,7 +8,9 @@ from time import sleep
 from twisted.python import log
 from twisted.internet import reactor
 
+
 class UserServer(WebSocketServerProtocol):
+
     def onConnect(self, request):
         pass
 
@@ -17,13 +19,12 @@ class UserServer(WebSocketServerProtocol):
 
     def onMessage(self, payload, isBinary):
         print(payload)
-        #logic goes here
+        # logic goes here
         sleep(5)
         self.sendMessage("Done")
 
     def onClose(self, wasClean, code, reason):
         pass
-
 
 
 def server_side():

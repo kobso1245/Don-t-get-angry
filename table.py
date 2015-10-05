@@ -7,7 +7,9 @@ with open('settings.json') as settings:
     TABLE_LENGTH = setting['TABLE_LENGTH']
     FIGURES_COUNT = setting['FIGURES_COUNT']
 
+
 class Player:
+
     def __init__(self, name, pl_id, color, starting_point):
         self.name = name
         self.id_ = pl_id
@@ -19,6 +21,7 @@ class Player:
 
 
 class Figure:
+
     def __init__(self, player):
         self.moves_made = 0
         self.player = player
@@ -34,9 +37,9 @@ class Figure:
         else:
             game.table[new_pos].pop()
 
-        if type(game.table[new_pos]) is int:
+        if isinstance(game.table[new_pos], int):
             game.table[new_pos] = [self]
-        elif type(game.table[new_pos]) is list:
+        elif isinstance(game.table[new_pos], list):
             if len(game.table[new_pos]) == 1:
                 if game.table[new_pos].player.id_ == self.id_:
                     game.table[new_pos].append(self)
@@ -54,24 +57,27 @@ class Figure:
             return (old_pos + points) % TABLE_LENGTH
         if goal in range(TABLE_LENGTH, TABLE_LENGTH + 7):
             self.moves_made += points
-            return TABLE_LENGTH + (self.player.id_*4 + goal - TABLE_LENGTH)
+            return TABLE_LENGTH + (self.player.id_ * 4 + goal - TABLE_LENGTH)
 
-    #to be defined
+    # to be defined
     def __eq__(self, other):
         pass
 
 
 class Game:
+
     def __init__(self, current_player):
         self.players = []
         self.table = [-1 for x in range(TABLE_LENGTH + 24)]
         self.current_player = current_player
+
     def move_figure(self, figure, points):
-        #auth required
+        # auth required
         figure.move(points, self)
 
+
 class Dice:
+
     @staticmethod
     def roll_dice():
-        return (randrange(1,6), randrange(1,6))
-
+        return (randrange(1, 6), randrange(1, 6))
